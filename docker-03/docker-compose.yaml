@@ -1,5 +1,20 @@
+version: '3'
 services:
   web:
-    buid: .
+    build: .
+    ports: 
+      - "5000:5000"
+    depends_on:
+      - db
+    restart: on-failure
+    environment: 
+      FLASK_ENV: development
+  
+  db: 
+    image: mysql:latest
+    restart: always
+    environment: 
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=test_db
     ports:
-      -
+      - "3306:3306"
